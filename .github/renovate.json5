@@ -1,0 +1,50 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    ":semanticCommitsDisabled",
+    "github>grafana/sm-renovate//renovate/grafana.json5",
+    "github>grafana/sm-renovate//renovate/alpine-packages.json5"
+  ],
+  "packageRules": [
+    {
+      // Update alpine itself and all dependencies in the same PR. This ensures consistency, e.g. renovate does not
+      // attempt to update chromium without updating alpine if an update for the latter is also available, as that PR
+      // would fail.
+      "matchFileNames": [
+        "Dockerfile"
+      ],
+      "groupName": "Dockerfile",
+    },
+  ],
+  "customManagers": [
+    {
+      // Update alpine tag, which is stored in an ARG for easy greppability.
+      "customType": "regex",
+      "depNameTemplate": "alpine",
+      "datasourceTemplate": "docker",
+      "fileMatch": [
+        "Dockerfile"
+      ],
+      "matchStrings": [
+        "ALPINE_VERSION=(?<currentValue>[^@\\s]+)(?:@(?<currentDigest>\\S+))?"
+      ]
+    },
+    {
+      // Update chromium version from alpine packages.
+      "customType": "regex",
+      "fileMatch": [
+        "Dockerfile",
+      ],
+      "matchStrings": [
+        "CHROMIUM_VERSION=(?<currentValue>[-.\\w]+)"
+      ],
+      "depNameTemplate": "chromium-swiftshader",
+      "versioningTemplate": "loose", // The most lenient versioning renovate supports.
+      // We use two different datasources for main and community, as alpine serves them in different URLs.
+      "datasourceTemplate": "custom.alpine-community",
+      // Extracted "versions" include the package name, so here we strip that prefix using a regex.
+      "extractVersionTemplate": "{{depName}}-(?<version>.+).apk",
+    },
+  ]
+}
