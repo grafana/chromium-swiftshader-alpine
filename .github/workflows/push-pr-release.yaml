@@ -1,0 +1,34 @@
+name: Build
+
+on:
+  pull_request: {}
+  push:
+    branches:
+      - main
+
+jobs:
+  build-contianer:
+    name: Build container
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Gather versions
+        id: repo
+        run: |-
+          alpine_version_full="$(grep -e "ALPINE_VERSION=" Dockerfile | cut -d '=' -f 2)"
+          alpine_version="${alpine_version_full%@*}"
+          chromium_version="$(grep -e "CHROMIUM_VERSION=" Dockerfile | cut -d '=' -f 2)"
+          echo "alpine_version_full=$alpine_version_full" >> "$GITHUB_OUTPUT"
+          echo "alpine_version=$alpine_version" >> "$GITHUB_OUTPUT"
+          echo "chromium_version=$chromium_version" >> "$GITHUB_OUTPUT"
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: ${{ github.event_name == 'push' }}
+          platforms: linux/amd64,linux/arm64
+          tags: |-
+            ghcr.io/${{ github.repository }}:${{ steps.repo.outputs.alpine_version }}-${{ steps.repo.outputs.chromium_version }}
