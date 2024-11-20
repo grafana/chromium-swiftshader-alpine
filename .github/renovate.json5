@@ -44,7 +44,7 @@
       // We use two different datasources for main and community, as alpine serves them in different URLs.
       "datasourceTemplate": "custom.alpine-community",
       // Extracted "versions" include the package name, so here we strip that prefix using a regex.
-      "extractVersionTemplate": "{{depName}}-(?<version>.+).apk",
+      "extractVersionTemplate": "chromium-swiftshader-(?<version>.+).apk",
     },
   ]
 }
