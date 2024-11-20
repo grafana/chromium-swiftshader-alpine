@@ -3,8 +3,8 @@
   "extends": [
     "config:best-practices",
     ":semanticCommitsDisabled",
-    "github>grafana/sm-renovate//renovate/grafana.json5",
-    "github>grafana/sm-renovate//renovate/alpine-packages.json5"
+    "github>grafana/sm-renovate//presets/grafana.json5",
+    "github>grafana/sm-renovate//presets/alpine-packages.json5"
   ],
   "packageRules": [
     {
