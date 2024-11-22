@@ -41,4 +41,4 @@ jobs:
           push: ${{ github.event_name == 'push' }}
           platforms: linux/amd64,linux/arm64
           tags: |-
-            ghcr.io/${{ github.repository }}:${{ steps.repo.outputs.alpine_version }}-${{ steps.repo.outputs.chromium_version }}
+            ghcr.io/${{ github.repository }}:${{ steps.repo.outputs.chromium_version }}-${{ steps.repo.outputs.alpine_version }}
