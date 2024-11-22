@@ -16,6 +16,9 @@
         "Dockerfile"
       ],
       "groupName": "Dockerfile",
+      // Allow renovate to automatically merge PRs created for these packages. Renovate automatically checks CI/CD
+      // status and will _not_ automerge PRs which have failures.
+      "automerge": true,
     },
   ],
   "customManagers": [
