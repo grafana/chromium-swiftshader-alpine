@@ -1,10 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:best-practices",
-    ":semanticCommitsDisabled",
-    ":disableDependencyDashboard",
     "github>grafana/sm-renovate//presets/grafana.json5",
+    "github>grafana/sm-renovate//presets/synthetic-monitoring.json5",
     "github>grafana/sm-renovate//presets/alpine-packages.json5"
   ],
   "packageRules": [
