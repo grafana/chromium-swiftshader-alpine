@@ -6,7 +6,6 @@ metadata:
   description: |
     Chromium container image used with Synthetic Monitoring
   annotations:
-    backstage.io/techdocs-ref: dir:.
     github.com/project-slug: grafana/chromium-swiftshader-alpine
 spec:
   type: tool
