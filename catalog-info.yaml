@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: chromium-swiftshader-alpine
+  title: chromium-swiftshader-alpine
+  description: |
+    Chromium container image used with Synthetic Monitoring
+  annotations:
+    github.com/project-slug: grafana/chromium-swiftshader-alpine
+spec:
+  type: tool
+  owner: group:default/synthetic-monitoring-dev
+  lifecycle: production
