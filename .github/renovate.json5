@@ -25,7 +25,7 @@
       "customType": "regex",
       "depNameTemplate": "alpine",
       "datasourceTemplate": "docker",
-      "fileMatch": [
+      "managerFilePatterns": [
         "Dockerfile"
       ],
       "matchStrings": [
@@ -35,7 +35,7 @@
     {
       // Update chromium version from alpine packages.
       "customType": "regex",
-      "fileMatch": [
+      "managerFilePatterns": [
         "Dockerfile",
       ],
       "matchStrings": [
