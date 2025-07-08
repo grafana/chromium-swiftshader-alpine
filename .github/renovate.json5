@@ -11,7 +11,7 @@
       // attempt to update chromium without updating alpine if an update for the latter is also available, as that PR
       // would fail.
       "matchFileNames": [
-        "Dockerfile"
+        "Dockerfile*"
       ],
       "groupName": "Dockerfile",
       // Allow renovate to automatically merge PRs created for these packages. Renovate automatically checks CI/CD
@@ -26,17 +26,29 @@
       "depNameTemplate": "alpine",
       "datasourceTemplate": "docker",
       "fileMatch": [
-        "Dockerfile"
+        "Dockerfile*"
       ],
       "matchStrings": [
         "ALPINE_VERSION=(?<currentValue>[^@\\s]+)(?:@(?<currentDigest>\\S+))?"
       ]
     },
     {
+      // Update node tag, which is stored in an ARG for easy greppability.
+      "customType": "regex",
+      "depNameTemplate": "node",
+      "datasourceTemplate": "docker",
+      "fileMatch": [
+        "Dockerfile*"
+      ],
+      "matchStrings": [
+        "NODE_VERSION=(?<currentValue>[^@\\s]+)(?:@(?<currentDigest>\\S+))?"
+      ]
+    },
+    {
       // Update chromium version from alpine packages.
       "customType": "regex",
       "fileMatch": [
-        "Dockerfile",
+        "Dockerfile*",
       ],
       "matchStrings": [
         "CHROMIUM_VERSION=(?<currentValue>[-.\\w]+)"
