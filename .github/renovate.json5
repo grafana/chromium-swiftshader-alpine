@@ -5,6 +5,10 @@
     "github>grafana/sm-renovate//presets/synthetic-monitoring.json5",
     "github>grafana/sm-renovate//presets/alpine-packages.json5"
   ],
+  "ignorePresets": [
+    "github>grafana/grafana-renovate-config//presets/shared-workflows",
+    "github>grafana/grafana-renovate-config//presets/automerge"
+  ],
   "packageRules": [
     {
       // Update alpine itself and all dependencies in the same PR. This ensures consistency, e.g. renovate does not
