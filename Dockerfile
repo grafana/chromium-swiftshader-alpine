@@ -6,5 +6,5 @@ FROM alpine:${ALPINE_VERSION}
 RUN apk add --no-cache font-noto font-noto-cjk
 
 # Renovate and CI/CD interact with the following line. Keep its format as it is.
-ARG CHROMIUM_VERSION=139.0.7258.66-r0
+ARG CHROMIUM_VERSION=139.0.7258.154-r0
 RUN apk add --no-cache "chromium-swiftshader=${CHROMIUM_VERSION}"
