@@ -14,6 +14,6 @@ jobs:
     # https://woodruffw.github.io/zizmor/audits/#bot-conditions
     if: github.event.pull_request.user.login == 'renovate-sh-app[bot]' && github.repository == github.event.pull_request.head.repo.full_name
     steps:
-      - uses: grafana/sm-renovate/actions/renovate-approve@e468a07f8432a47ffa85757020059324f902f847
+      - uses: grafana/sm-renovate/actions/renovate-approve@d34ecb4beeeaedcb438a30ce6a267c21c0e55ba8
         with:
           renovate-user: 'renovate-sh-app[bot]'
