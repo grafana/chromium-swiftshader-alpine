@@ -45,12 +45,12 @@
       "matchStrings": [
         "CHROMIUM_VERSION=(?<currentValue>[-.\\w]+)"
       ],
-      "depNameTemplate": "chromium-swiftshader",
+      "depNameTemplate": "chromium",
       "versioningTemplate": "loose", // The most lenient versioning renovate supports.
       // We use two different datasources for main and community, as alpine serves them in different URLs.
       "datasourceTemplate": "custom.alpine-community",
       // Extracted "versions" include the package name, so here we strip that prefix using a regex.
-      "extractVersionTemplate": "chromium-swiftshader-(?<version>.+).apk",
+      "extractVersionTemplate": "^chromium-(?<version>\\d.+).apk$",
     },
   ]
 }
