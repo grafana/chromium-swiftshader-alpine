@@ -26,6 +26,9 @@
       // We need to do this because renovate cannot figure out the release date of chromium packages, as those are
       // parsed from the HTML page at https://dl-cdn.alpinelinux.org/alpine/latest-stable/community/x86_64/.
       "minimumReleaseAge": "",
+      // Do not separate majors and minors for this group. This allows a major version bump (which chromium typically
+      // has) to share the branch with a minior version bump (which alpine typically has).
+      "separateMajorMinor": false,
     },
   ],
   "customManagers": [
