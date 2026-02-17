@@ -21,6 +21,11 @@
       // Allow renovate to automatically merge PRs created for these packages. Renovate automatically checks CI/CD
       // status and will _not_ automerge PRs which have failures.
       "automerge": true,
+      // Disable minimumReleaseAge. As this setting is inherited from the default config in
+      // https://github.com/grafana/deployment_tools/blob/16231ba00eac9310d2360a2075a96b1106a02c34/ksonnet/lib/renovate-self-hosted/renovate.jsonnet#L33
+      // We need to do this because renovate cannot figure out the release date of chromium packages, as those are
+      // parsed from the HTML page at https://dl-cdn.alpinelinux.org/alpine/latest-stable/community/x86_64/.
+      "minimumReleaseAge": "",
     },
   ],
   "customManagers": [
