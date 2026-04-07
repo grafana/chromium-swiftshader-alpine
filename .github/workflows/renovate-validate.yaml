@@ -1,29 +1,31 @@
 name: Validate renovate config
+
 on:
   pull_request:
     paths:
-      # When renovate config changes:
-      - "renovate.*"
-      - ".renovate.*"
-      - ".github/renovate.*"
-      # Also when renovate version changes:
-      - ".github/workflows/renovate*"
+      - ".github/renovate.json"
+      - ".github/renovate.json5"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/renovate.json"
+      - ".github/renovate.json5"
 
 permissions:
   contents: none
 
 jobs:
-  renovate:
+  validate:
+    runs-on: ubuntu-latest
     permissions:
       # Needed for logging into vault.
       contents: read
       id-token: write
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
     steps:
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
-      - name: Self-hosted renovate
-        uses: grafana/sm-renovate/actions/renovate-validate@7da70f096b8115d523da4fdae72733b17c9895e1 # main
+      - name: Validate Renovate Config
+        uses: grafana/shared-workflows/actions/validate-renovate-config@726f1a912f45b4807774b76a6d40cbd3fb7a12c0 # validate-renovate-config/v0.1.2
