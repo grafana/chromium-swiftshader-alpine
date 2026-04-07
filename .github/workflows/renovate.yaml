@@ -22,4 +22,4 @@ jobs:
         with:
           persist-credentials: false
       - name: Self-hosted renovate
-        uses: grafana/sm-renovate/actions/renovate@main
+        uses: grafana/sm-renovate/actions/renovate@7da70f096b8115d523da4fdae72733b17c9895e1 # main
