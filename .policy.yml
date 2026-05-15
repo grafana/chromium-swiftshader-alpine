@@ -10,6 +10,10 @@ policy:
             - default to approval
 approval_rules:
   - name: Workflow .github/workflows/push-pr-release.yaml succeeded or skipped
+    if:
+      file_not_deleted:
+        paths:
+          - ^\.github\/workflows\/push-pr-release\.yaml$
     requires:
       conditions:
         has_workflow_result:
@@ -26,6 +30,9 @@ approval_rules:
           - ^\.renovate\.(?:[^/]*)$
           - ^\.github\/renovate\.(?:[^/]*)$
           - ^\.github\/workflows\/renovate(?:[^/]*)$
+      file_not_deleted:
+        paths:
+          - ^\.github\/workflows\/renovate-validate\.yaml$
     requires:
       conditions:
         has_workflow_result:
