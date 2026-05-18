@@ -11,3 +11,18 @@ FROM ghcr.io/grafana/chromium-swiftshader-alpine:000.0.0000.00-r0-0.0.0@sha256:e
 ```
 
 That way, dependency bumping bots will create PRs when the tag is overwritten.
+
+## Updating the Chrome version
+
+Renovate is set up to update [the Chrome version used to build the container
+image](Dockerfile).
+
+Should that process fail for some reason, you can verify [the version currently
+available from the Alpine community repository][alpine-search]. Notice the
+branch might need to be adjusted to reflect what's current. Notice as well that
+currently we use `chromium-swiftshader`, **not** `chromium`.
+
+Should there ever be a need to update this version by hand, update the
+[Dockerfile](Dockerfile) and create a new release.
+
+[alpine-search]: https://pkgs.alpinelinux.org/packages?name=chromium-swiftshader&branch=v3.23&repo=&arch=x86_64&origin=&flagged=&maintainer=
