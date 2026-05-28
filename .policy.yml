@@ -26,10 +26,8 @@ approval_rules:
     if:
       changed_files:
         paths:
-          - ^renovate\.(?:[^/]*)$
-          - ^\.renovate\.(?:[^/]*)$
-          - ^\.github\/renovate\.(?:[^/]*)$
-          - ^\.github\/workflows\/renovate(?:[^/]*)$
+          - ^\.github\/renovate\.json$
+          - ^\.github\/renovate\.json5$
       file_not_deleted:
         paths:
           - ^\.github\/workflows\/renovate-validate\.yaml$
