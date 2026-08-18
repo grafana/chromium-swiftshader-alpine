@@ -9,3 +9,4 @@ Three systems parse the Dockerfile ARG lines independently: Renovate custom rege
 ## Gotchas
 
 Alpine and Chromium versions must be bumped together. A Chromium package version that exists for one Alpine release may not exist for another, so splitting them into separate changes causes builds that fail only at install time with a cryptic package-not-found error.
+- Security issues should be reported via [Grafana's security issue reporting page](https://grafana.com/legal/report-a-security-issue/) and not directly in this repository.
