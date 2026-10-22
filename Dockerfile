@@ -3,10 +3,13 @@ ARG ALPINE_VERSION=3.24.2@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb
 
 FROM alpine:${ALPINE_VERSION}
 
+# The base image may ship an outdated CA bundle (CVE-2026-111943), refresh it from the repository.
+RUN apk add --no-cache --upgrade ca-certificates ca-certificates-bundle
+
 RUN apk add --no-cache font-noto font-noto-cjk
 
 # Renovate and CI/CD interact with the following line. Keep its format as it is.
-ARG CHROMIUM_VERSION=155.0.8059.39-r0
+ARG CHROMIUM_VERSION=155.0.8059.84-r0
 # chromium-swiftshader r1 (musl stack-limit fix, aports@a4485411) fixes CVE-2026-87534,
 # CVE-2026-87544, CVE-2026-87595, CVE-2026-87643, CVE-2026-87646, CVE-2026-87650.
 # Not yet backported to v3.24 stable community. Enabling edge here pulls chromium's
@@ -19,6 +22,10 @@ RUN printf 'https://dl-cdn.alpinelinux.org/alpine/edge/main\nhttps://dl-cdn.alpi
 	&& apk add --no-cache "chromium=${CHROMIUM_VERSION}" "chromium-swiftshader=${CHROMIUM_VERSION}" \
 	&& sed -i '\#/alpine/edge/#d' /etc/apk/repositories \
 	&& apk update
+
+# Chromium does not reject the compromised eMudhra intermediates (CVE-2026-111943) on its own, and the CA bundle
+# update above does not affect it. See chromium-policies/README.md.
+COPY chromium-policies/emudhra-distrust.json /etc/chromium/policies/managed/emudhra-distrust.json
 
 # Build time check, asserting chromium binary is installed and sane
 RUN chromium --version
